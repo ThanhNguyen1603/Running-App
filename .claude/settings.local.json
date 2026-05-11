@@ -14,7 +14,9 @@
       "Bash(git init *)",
       "Bash(git remote *)",
       "Bash(git push *)",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:Supabase@2026@db.jfvkfiijxoxucuvmqvyo.supabase.co:5432/postgres\" npx prisma db seed)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:Supabase@2026@db.jfvkfiijxoxucuvmqvyo.supabase.co:5432/postgres\" npx prisma migrate deploy)"
     ]
   }
 }
