@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  avatarUrl    String?
+  isAdmin      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  stravaConnection StravaConnection?
+  groupMembers     GroupMember[]
+  activities       Activity[]
+  challengesCreated Challenge[]
+}
+
+model StravaConnection {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  stravaAthleteId String   @unique
+  accessToken     String
+  refreshToken    String
+  tokenExpiresAt  DateTime
+  scope           String
+  connectedAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Challenge {
+  id              String   @id @default(uuid())
+  name            String
+  description     String?
+  startDate       DateTime
+  endDate         DateTime
+  minDaysPerWeek  Int      @default(3)
+  minPaceSecPerKm Int?
+  maxPaceSecPerKm Int?
+  monthlyKmGoal   Float
+  createdBy       String
+  createdAt       DateTime @default(now())
+
+  creator User    @relation(fields: [createdBy], references: [id])
+  groups  Group[]
+}
+
+model Group {
+  id          String   @id @default(uuid())
+  challengeId String
+  name        String
+  description String?
+  inviteCode  String   @unique @default(cuid())
+  createdAt   DateTime @default(now())
+
+  challenge Challenge     @relation(fields: [challengeId], references: [id])
+  members   GroupMember[]
+}
+
+model GroupMember {
+  groupId  String
+  userId   String
+  joinedAt DateTime @default(now())
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([groupId, userId])
+}
+
+model Activity {
+  id               String   @id @default(uuid())
+  userId           String
+  stravaActivityId String   @unique
+  distanceM        Float
+  movingTimeSec    Int
+  averageSpeedMs   Float
+  startDateLocal   DateTime
+  isValid          Boolean  @default(false)
+  validationReason String?
+  syncedAt         DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, startDateLocal])
+}

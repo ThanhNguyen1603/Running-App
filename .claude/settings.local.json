@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx create-expo-app *)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/runningapp\" npx prisma migrate dev --name init)",
+      "Bash(curl -s http://localhost:3005/health)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s http://localhost:8080/health)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/runningapp\" npx ts-node prisma/seed.ts)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:postgres@localhost:5432/runningapp\" ADMIN_EMAIL=\"nguyentrungthanh160399@gmail.com\" ADMIN_PASSWORD=\"Running@2026\" npx ts-node prisma/seed.ts)",
+      "Bash(curl -s -X POST http://localhost:8080/auth/login -H \"Content-Type: application/json\" -d \"{\\\\\"email\\\\\":\\\\\"nguyentrungthanh160399@gmail.com\\\\\",\\\\\"password\\\\\":\\\\\"Running@2026\\\\\"}\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d['version']\\)\")",
+      "Bash(git init *)",
+      "Bash(git remote *)"
+    ]
+  }
+}
