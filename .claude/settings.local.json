@@ -12,7 +12,9 @@
       "Bash(curl -s -X POST http://localhost:8080/auth/login -H \"Content-Type: application/json\" -d \"{\\\\\"email\\\\\":\\\\\"nguyentrungthanh160399@gmail.com\\\\\",\\\\\"password\\\\\":\\\\\"Running@2026\\\\\"}\")",
       "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d['version']\\)\")",
       "Bash(git init *)",
-      "Bash(git remote *)"
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git branch *)"
     ]
   }
 }
