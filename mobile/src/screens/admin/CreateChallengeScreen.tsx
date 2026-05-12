@@ -32,8 +32,8 @@ export default function CreateChallengeScreen() {
     try {
       await createChallenge({
         name: form.name,
-        startDate: form.startDate,
-        endDate: form.endDate,
+        startDate: new Date(form.startDate + 'T00:00:00.000Z').toISOString(),
+        endDate: new Date(form.endDate + 'T23:59:59.000Z').toISOString(),
         monthlyKmGoal: Number(form.monthlyKmGoal),
         minDaysPerWeek: Number(form.minDaysPerWeek),
         minPaceSecPerKm: form.minPaceSecPerKm ? Number(form.minPaceSecPerKm) : null,

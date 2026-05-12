@@ -262,9 +262,22 @@ npx prisma studio     # GUI xem database
 ### Mobile
 ```bash
 cd mobile
-npx expo start        # start dev server
-npx expo run:android  # build + chạy trên device/emulator
+npx expo start              # start dev server (cùng mạng LAN)
+npx expo start --tunnel     # start dev server (khác mạng, dùng ngrok)
+npx expo run:android        # build + chạy trên device/emulator
 ```
+
+### Build APK (EAS Build — không cần PC, chạy độc lập)
+```bash
+npm install -g eas-cli      # cài EAS CLI (1 lần)
+eas login                   # login Expo account
+cd mobile
+eas build:configure         # cấu hình (1 lần, chọn Android)
+eas build --platform android --profile preview   # build APK trên cloud (~10-15 phút)
+```
+- Sau khi build xong EAS gửi link tải APK, cài thẳng lên Android
+- APK gọi thẳng Railway, không cần PC đang chạy
+- Cần có tài khoản tại expo.dev
 
 ## Deploy
 
